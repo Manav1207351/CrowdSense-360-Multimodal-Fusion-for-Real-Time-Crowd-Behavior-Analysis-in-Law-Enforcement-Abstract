@@ -1,0 +1,25 @@
+device: "cpu"               # or "cuda"
+video_source: "a:/VID-20251118-WA0005.mp4"
+video_sources: "E:/Crwoed/Dataset/D49_20250902165502.mp4"
+ 
+models:
+  crowd: "A:/src1/models/crowd_yolo6/weights/best.pt"
+  fight: "A:/src1/models/fight_yolo/weights/best.pt"
+  weapon: "A:/src1/models/weapon4/weights/best.pt"
+thresholds:
+  detection_conf: 0.25
+  weapon_conf: 0.25
+  fight_conf: 0.4
+output_dir: "outputs"
+alert_screenshot_dir: "outputs/alerts"
+people:
+  group_distance_px: 150
+  group_persist_seconds: 120
+  group_threshold: 5
+cameras:
+  night_start: 20
+  night_end: 6
+alerting:
+  enable_http: true
+  http_endpoint: "http://127.0.0.1:5000/api/alerts"
+  api_key: ""

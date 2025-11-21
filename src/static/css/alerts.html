@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>CrowdSense360 — Alerts Timeline</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>Alerts Timeline</h1>
+    <p><a href="/">← Back to Live</a></p>
+
+    <table class="alerts-table">
+      <thead>
+        <tr><th>ID</th><th>Type</th><th>Message</th><th>Snapshot</th><th>Clip</th><th>Time (UTC)</th></tr>
+      </thead>
+      <tbody>
+        {% for a in alerts %}
+        <tr>
+          <td>{{ a.id }}</td>
+          <td>{{ a.type }}</td>
+          <td>{{ a.message }}</td>
+          <td>
+            {% if a.snapshot %}
+              <a href="{{ url_for('static', filename='..') }}{{ '/' ~ a.snapshot }}" target="_blank">view</a>
+            {% else %}
+              -
+            {% endif %}
+          </td>
+          <td>
+            {% if a.clip %}
+              <a href="{{ url_for('static', filename='..') }}{{ '/' ~ a.clip }}" target="_blank">play</a>
+            {% else %}
+              -
+            {% endif %}
+          </td>
+          <td>{{ a.ts }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

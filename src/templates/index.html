@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>CrowdSense360 - Dashboard</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 18px; }
+    .alerts { margin-top: 12px; }
+    pre { background:#f4f4f4; padding:8px; overflow:auto; }
+  </style>
+</head>
+<body>
+  <h1>CrowdSense360</h1>
+  <p>Live detector should run separately. Alerts received by this dashboard:</p>
+  <button id="refresh">Refresh alerts</button>
+  <div class="alerts" id="alerts"></div>
+
+  <script>
+    async function loadAlerts(){
+      const res = await fetch('/api/alerts/list');
+      const files = await res.json();
+      const el = document.getElementById('alerts');
+      el.innerHTML = '';
+      for(const f of files){
+        const r = await fetch('/api/alerts/get/' + f);
+        const text = await r.text();
+        const pre = document.createElement('pre');
+        pre.textContent = text;
+        el.appendChild(pre);
+      }
+    }
+    document.getElementById('refresh').onclick = loadAlerts;
+    loadAlerts();
+  </script>
+</body>
+</html>

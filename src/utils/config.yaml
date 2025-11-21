@@ -1,0 +1,26 @@
+device: "cpu"               # or "cuda"
+video_source: "E:/Crwoed/Dataset/D49_20250902165502.mp4"            # camera index or "path/to/file.mp4"
+video_sources: "E:/Crwoed/Dataset/D49_20250902165502.mp4"
+  - 0
+  - 1
+models:
+  yolo: "D:/CrowedSense 360/models/yolov8n.pt"
+  weapon: "D:/CrowedSense 360/models/weapon_yolo2/weights/best.pt"
+  fight_classifier: "D:/CrowedSense 360/models/fight_yolo/weights/best.pt"
+  crowd: "D:/CrowedSense 360/models/crowd_yolo6/weights/best.pt"
+thresholds:
+  detection_conf: 0.35
+  weapon_conf: 0.4
+  fight_conf: 0.5
+output_dir: "D:/CrowedSense 360/outputs/"
+alert_screenshot_dir: "../../outputs/alerts"
+people:
+  stationary_seconds: 300
+  group_threshold: 5
+cameras:
+  night_start: 20
+  night_end: 6
+alerting:
+  enable_http: true
+  http_endpoint: "http://127.0.0.1:5000/api/alerts"
+  api_key: ""
